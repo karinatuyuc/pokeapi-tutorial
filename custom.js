@@ -33,7 +33,6 @@ const getPokemons = (url) => {
     .then(response => response.json())
     
     .then(responseJson => {
-        console.log(responseJson)
         nextLink = responseJson.next;
         prevLink = responseJson.previous;
         count = responseJson.count
@@ -55,16 +54,20 @@ const showPokemons = (array) => {
 }
 
 const loadCard = (data) => {
-    //console.log(data)
+  //  console.log(data)
     const imagen =  data.sprites.other.home.front_default;
     const newImage = imagen ? imagen : "./images/defualt.png";
     const name = data.name
+    const abilities = 
+    data.abilities.map((habilidad) => habilidad.ability.name).join(" * ");
+    console.log(abilities)
 
-    let card = document.createElement("ul");
+    let card = document.createElement("li");
 
     let content = `
       <img src="${newImage}" alt="${name}">
-      <p>${name}</p>
+      <h1>${name}</h1>
+      <h2>${abilities}</h2>
       <p class="order">#${data.order}</p>
     
     `
